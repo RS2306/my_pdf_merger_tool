@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <meta name="theme-color" content="#28a745">
+    <meta name="description" content="Merge PDF files locally in your browser. Your files stay on your device.">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="default">
+    <meta name="apple-mobile-web-app-title" content="PDF Merger">
+    <meta name="msapplication-TileColor" content="#28a745">
+    <link rel="manifest" href="manifest.webmanifest">
+    <link rel="icon" type="image/png" sizes="32x32" href="icons/icon-32.png">
+    <link rel="apple-touch-icon" href="icons/icon-180.png">
+    <title>PDF Merger</title>
+    <link rel="stylesheet" href="styles.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf-lib/1.16.0/pdf-lib.min.js"></script>
+</head>
+<body>
+    <div class="container">
+        <h1>Merge PDFs Locally</h1>
+        <button id="installBtn" class="install-btn" type="button" style="display:none;">📲 Install App</button>
+        <input type="file" id="pdfFiles" multiple accept="application/pdf">
+        <button id="mergeBtn">Merge PDFs</button>
+        <p id="status"></p>
+        <a id="downloadLink" style="display:none;" download="merged.pdf">Download Merged PDF</a>
+    </div>
+    <script src="script.js"></script>
+    <script>
+        // Register the service worker for offline/PWA support.
+        if ("serviceWorker" in navigator) {
+            window.addEventListener("load", () => {
+                navigator.serviceWorker.register("./service-worker.js")
+                    .catch(err => console.error("Service worker registration failed:", err));
+            });
+        }
+    </script>
+</body>
+</html>
